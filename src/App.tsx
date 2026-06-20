@@ -50,7 +50,8 @@ import {
   Mail, 
   RefreshCw, 
   BarChart3,
-  UserCheck
+  UserCheck,
+  User
 } from "lucide-react";
 
 export default function App() {
@@ -292,7 +293,16 @@ export default function App() {
 
   // Helper values
   const countUnreadMessages = kontak.filter(c => !c.telahDibaca).length;
-  const isAdmin = role === "Admin";
+
+  // Granular role permissions mapped to the previous simple boolean checks
+  const canEditProfile = role === "Admin Manager" || role === "Editor";
+  const canEditLayanan = role === "Admin Manager" || role === "Auditor";
+  const canEditProses = role === "Admin Manager" || role === "Auditor";
+  const canEditRegulasi = role === "Admin Manager" || role === "Auditor";
+  const canEditBerita = role === "Admin Manager" || role === "Editor";
+  const canEditFaq = role === "Admin Manager" || role === "Editor";
+  const canEditKontak = role === "Admin Manager" || role === "Staf";
+  const canSync = role === "Admin Manager";
 
   // Breadcrumb icon selector
   const getBreadcrumbIcon = () => {
@@ -351,11 +361,17 @@ export default function App() {
           <div className="flex items-center gap-3">
             {/* Quick Authority indicator */}
             <div className={`p-1 px-3.5 rounded-full border text-[10px] font-bold tracking-wide select-none ${
-              isAdmin 
-                ? "bg-emerald-50 text-emerald-800 border-emerald-200" 
-                : "bg-amber-50 text-amber-800 border-amber-200"
+              role === "Admin Manager" ? "bg-emerald-50 text-emerald-800 border-emerald-200" :
+              role === "Editor" ? "bg-purple-50 text-purple-800 border-purple-200" :
+              role === "Auditor" ? "bg-blue-50 text-blue-800 border-blue-200" :
+              role === "Staf" ? "bg-amber-50 text-amber-800 border-amber-200" :
+              "bg-slate-100 text-slate-700 border-slate-300"
             }`}>
-              {isAdmin ? "ADMIN CONTROL CENTER" : "GUEST LEVEL VIEW"}
+              {role === "Admin Manager" ? "🔓 ADMIN MANAGER: FULL ACCESS" :
+               role === "Editor" ? "✍️ EDITOR: PROFIL & MEDIA" :
+               role === "Auditor" ? "⚖️ AUDITOR: LAYANAN & REGULASI" :
+               role === "Staf" ? "📬 STAF: KONTAK & INBOX" :
+               "👁️ GUEST: READ-ONLY VIEW"}
             </div>
 
             <div className="h-4 w-px bg-slate-200" />
@@ -364,12 +380,18 @@ export default function App() {
               <span className="text-xs font-bold text-slate-700 hidden sm:inline-block">
                 {defaultUserSession.name}
               </span>
-              <img 
-                src={defaultUserSession.avatar} 
-                alt="user avatar" 
-                className="w-8 h-8 rounded-full border border-slate-200/80 shrink-0"
-                referrerPolicy="no-referrer"
-              />
+              {defaultUserSession.avatar ? (
+                <img 
+                  src={defaultUserSession.avatar} 
+                  alt="user avatar" 
+                  className="w-8 h-8 rounded-full border border-slate-200/80 shrink-0"
+                  referrerPolicy="no-referrer"
+                />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-850 border border-emerald-200 flex items-center justify-center shrink-0 shadow-xs">
+                  <User size={14} className="stroke-[2.5]" />
+                </div>
+              )}
             </div>
           </div>
         </header>
@@ -388,7 +410,9 @@ export default function App() {
                 setActiveTab("layanan");
               }}
               onGoToSync={() => setActiveTab("sync")}
-              isAdmin={isAdmin}
+              isAdmin={canEditLayanan}
+              role={role}
+              onNavigate={setActiveTab}
             />
           )}
 
@@ -396,7 +420,7 @@ export default function App() {
             <ProfileTab 
               profile={profile}
               onUpdate={handleUpdateProfile}
-              isAdmin={isAdmin}
+              isAdmin={canEditProfile}
             />
           )}
 
@@ -406,7 +430,7 @@ export default function App() {
               onCreate={handleCreateLayanan}
               onUpdate={handleUpdateLayanan}
               onDelete={handleDeleteLayanan}
-              isAdmin={isAdmin}
+              isAdmin={canEditLayanan}
             />
           )}
 
@@ -417,7 +441,7 @@ export default function App() {
               onUpdate={handleUpdateProses}
               onDelete={handleDeleteProses}
               onReorder={handleReorderProses}
-              isAdmin={isAdmin}
+              isAdmin={canEditProses}
             />
           )}
 
@@ -427,7 +451,7 @@ export default function App() {
               onCreate={handleCreateRegulasi}
               onUpdate={handleUpdateRegulasi}
               onDelete={handleDeleteRegulasi}
-              isAdmin={isAdmin}
+              isAdmin={canEditRegulasi}
             />
           )}
 
@@ -437,7 +461,7 @@ export default function App() {
               onCreate={handleCreateBerita}
               onUpdate={handleUpdateBerita}
               onDelete={handleDeleteBerita}
-              isAdmin={isAdmin}
+              isAdmin={canEditBerita}
             />
           )}
 
@@ -447,7 +471,7 @@ export default function App() {
               onCreate={handleCreateFaq}
               onUpdate={handleUpdateFaq}
               onDelete={handleDeleteFaq}
-              isAdmin={isAdmin}
+              isAdmin={canEditFaq}
             />
           )}
 
@@ -457,7 +481,7 @@ export default function App() {
               onUpdate={handleUpdateKontak}
               onDelete={handleDeleteKontak}
               onCreate={handleCreateKontak}
-              isAdmin={isAdmin}
+              isAdmin={canEditKontak}
             />
           )}
 
@@ -478,7 +502,7 @@ export default function App() {
               }}
               onTriggerPull={handleTriggerPull}
               onTriggerPush={handleTriggerPush}
-              isAdmin={isAdmin}
+              isAdmin={canSync}
             />
           )}
         </main>

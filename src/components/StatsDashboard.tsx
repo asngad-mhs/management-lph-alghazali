@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Layanan, Proses, Regulasi, Berita, Kontak, FAQ } from "../types";
+import { Layanan, Proses, Regulasi, Berita, Kontak, FAQ, UserRole } from "../types";
 import { 
   Briefcase, 
   Workflow, 
@@ -13,7 +13,17 @@ import {
   Plus, 
   Zap, 
   HelpCircle, 
-  Rss 
+  Rss,
+  Key,
+  Edit,
+  Sliders,
+  Sparkles,
+  Search,
+  MessageCircle,
+  BookOpen,
+  UserCheck,
+  Award,
+  BookMarked
 } from "lucide-react";
 import { motion } from "motion/react";
 
@@ -27,6 +37,8 @@ interface StatsDashboardProps {
   onAddNewService: () => void;
   onGoToSync: () => void;
   isAdmin: boolean;
+  role: UserRole;
+  onNavigate: (tab: string) => void;
 }
 
 export default function StatsDashboard({
@@ -38,7 +50,9 @@ export default function StatsDashboard({
   kontak,
   onAddNewService,
   onGoToSync,
-  isAdmin
+  isAdmin,
+  role,
+  onNavigate
 }: StatsDashboardProps) {
   // Calculations
   const resolvedMessagesCount = kontak.filter(c => c.telahDibaca).length;
@@ -152,6 +166,245 @@ export default function StatsDashboard({
             </motion.div>
           );
         })}
+      </div>
+
+      {/* ROLE PORTAL & QUICK ACTIONS BENTO */}
+      <div className="bg-white p-6 rounded-xl border border-slate-200/80 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-3 gap-2">
+          <div>
+            <h4 className="text-sm font-bold text-slate-800 tracking-tight flex items-center gap-2 font-sans">
+              <UserCheck size={16} className="text-emerald-600 animate-pulse" />
+              Portal Kinerja Otoritas & Tindakan Cepat (Role-Based)
+            </h4>
+            <p className="text-[11px] text-slate-500 mt-0.5 font-sans">
+              Terdeteksi role Anda saat ini: <strong className="text-emerald-700 font-bold">{role}</strong>. Silakan eksekusi fitur fungsional di bawah ini sesuai deskripsi tugas.
+            </p>
+          </div>
+          <span className="text-[10px] uppercase font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200/60 px-2 py-0.5 rounded">
+            {role === "Admin Manager" ? "🔑 Admin Manager" :
+             role === "Editor" ? "✍️ Editor" :
+             role === "Auditor" ? "⚖️ Auditor" :
+             role === "Staf" ? "📬 Staf" : "👁️ Guest / User"}
+          </span>
+        </div>
+
+        {/* Dynamic Features Grid based on current active role */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Description / Privileges Column */}
+          <div className="md:col-span-1 bg-slate-50 p-4 rounded-lg border border-slate-200/40 flex flex-col justify-between">
+            <div>
+              <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block mb-2 font-mono">Daftar Otoritas Tugas</span>
+              <ul className="space-y-2 text-xs">
+                {role === "Admin Manager" && (
+                  <>
+                    <li className="flex items-center gap-2 text-slate-650">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Kontrol Penuh CRUD Semua Modul
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-650">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Konfigurasi Utama & Kunci API
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-650">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Simulasi Tarik (Pull) / Dorong (Push)
+                    </li>
+                  </>
+                )}
+                {role === "Editor" && (
+                  <>
+                    <li className="flex items-center gap-2 text-slate-650 font-medium">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Mutasi Artikel Berita & Syiar
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-650">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Sunting Detail Soal FAQ
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-650">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Perbaiki Visi-Misi Profil LPH
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-400 line-through">
+                      <span className="text-red-500 font-bold">✗</span> Atur katalog keuangan/layanan
+                    </li>
+                  </>
+                )}
+                {role === "Auditor" && (
+                  <>
+                    <li className="flex items-center gap-2 text-slate-650 font-medium">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Katalog Layanan Pemeriksaan
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-650">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Atur Alur Skuensialisasi Proses
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-650">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Perbarui Regulasi Kemenag/BPJPH
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-400 line-through">
+                      <span className="text-red-500 font-bold">✗</span> Modifikasi Berita / Inbox
+                    </li>
+                  </>
+                )}
+                {role === "Staf" && (
+                  <>
+                    <li className="flex items-center gap-2 text-slate-650 font-medium">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Akses Pesan & Konsultasi Masuk
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-650">
+                      <span className="text-emerald-600 font-bold text-sm">✓</span> Simulasikan Pertanyaan Inbound
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-400 line-through">
+                      <span className="text-red-500 font-bold">✗</span> Edit Layanan & Regulasi UU
+                    </li>
+                    <li className="flex items-center gap-2 text-slate-400 line-through">
+                      <span className="text-red-500 font-bold">✗</span> Sunting Berita / Konfigurasi API
+                    </li>
+                  </>
+                )}
+                {role === "User" && (
+                  <>
+                    <li className="flex items-center gap-2 text-slate-500 italic">
+                      <span>👁️</span> Mode Peninjauan Terbuka (Spectator). Tidak ada hak mengubah data sistem.
+                    </li>
+                  </>
+                )}
+              </ul>
+            </div>
+            <div className="border-t border-slate-200/60 pt-2 mt-3 text-[10px] text-slate-400 font-mono flex items-center justify-between">
+              <span>Status Otoritas: Active</span>
+              <span className="text-emerald-650 font-bold">Online</span>
+            </div>
+          </div>
+
+          {/* Buttons Container Column */}
+          <div className="md:col-span-2 flex flex-col justify-between space-y-3">
+            <div className="space-y-2">
+              <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest block font-mono">Pintasan Pekerjaan Anda:</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {role === "Admin Manager" && (
+                  <>
+                    <button
+                      onClick={() => onNavigate("profile")}
+                      className="flex items-center gap-2 bg-slate-800 text-white font-bold hover:bg-slate-700 text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <Edit size={14} className="text-emerald-400" />
+                      <span>Kelola Profil LPH</span>
+                    </button>
+                    <button
+                      onClick={() => onNavigate("layanan")}
+                      className="flex items-center gap-2 bg-slate-800 text-white font-bold hover:bg-slate-700 text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <Briefcase size={14} className="text-emerald-400" />
+                      <span>Katalog & Tarif Layanan</span>
+                    </button>
+                    <button
+                      onClick={() => onNavigate("kontak")}
+                      className="flex items-center gap-2 bg-slate-800 text-white font-bold hover:bg-slate-700 text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <Mail size={14} className="text-emerald-400" />
+                      <span>Respons Pesan Konsultasi</span>
+                    </button>
+                    <button
+                      onClick={() => onNavigate("sync")}
+                      className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <Zap size={14} className="text-amber-300 animate-pulse" />
+                      <span>Integrasi & Sinkronisasi API</span>
+                    </button>
+                  </>
+                )}
+
+                {role === "Editor" && (
+                  <>
+                    <button
+                      onClick={() => onNavigate("berita")}
+                      className="flex items-center gap-2 bg-slate-800 text-white font-bold hover:bg-slate-700 text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <BookMarked size={14} className="text-emerald-450 animate-pulse" />
+                      <span>Tulis Berita Syiar Halal</span>
+                    </button>
+                    <button
+                      onClick={() => onNavigate("faq")}
+                      className="flex items-center gap-2 bg-slate-800 text-white font-bold hover:bg-slate-700 text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <HelpCircle size={14} className="text-emerald-405" />
+                      <span>Tanya Jawab FAQ</span>
+                    </button>
+                    <button
+                      onClick={() => onNavigate("profile")}
+                      className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs p-3 rounded-lg text-left transition cursor-pointer sm:col-span-2"
+                    >
+                      <Edit size={14} />
+                      <span>Perbarui Visi, Misi & Alamat</span>
+                    </button>
+                  </>
+                )}
+
+                {role === "Auditor" && (
+                  <>
+                    <button
+                      onClick={() => onNavigate("layanan")}
+                      className="flex items-center gap-2 bg-slate-800 text-white font-bold hover:bg-slate-700 text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <Award size={14} className="text-emerald-405" />
+                      <span>Katalog & Tarif Layanan</span>
+                    </button>
+                    <button
+                      onClick={() => onNavigate("proses")}
+                      className="flex items-center gap-2 bg-slate-800 text-white font-bold hover:bg-slate-700 text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <Workflow size={14} className="text-emerald-405" />
+                      <span>Urutkan Alur Sertifikasi</span>
+                    </button>
+                    <button
+                      onClick={() => onNavigate("regulasi")}
+                      className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs p-3 rounded-lg text-left transition cursor-pointer sm:col-span-2"
+                    >
+                      <ShieldCheck size={14} />
+                      <span>Mutasi Regulasi JPH Aktif</span>
+                    </button>
+                  </>
+                )}
+
+                {role === "Staf" && (
+                  <>
+                    <button
+                      onClick={() => onNavigate("kontak")}
+                      className="flex items-center gap-2 bg-slate-800 text-white font-bold hover:bg-slate-700 text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <Mail size={14} className="text-emerald-450" />
+                      <span>Inbox Kontak Konsultasi</span>
+                    </button>
+                    <button
+                      onClick={() => onNavigate("kontak")}
+                      className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <Plus size={14} />
+                      <span>Buka Form Inbound Kontak</span>
+                    </button>
+                  </>
+                )}
+
+                {role === "User" && (
+                  <>
+                    <button
+                      onClick={() => onNavigate("proses")}
+                      className="flex items-center gap-2 bg-slate-100 text-slate-700 border border-slate-200 font-bold hover:bg-slate-200 text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <Workflow size={14} className="text-emerald-600" />
+                      <span>Tinjau Alur Standar JPH</span>
+                    </button>
+                    <button
+                      onClick={() => onNavigate("berita")}
+                      className="flex items-center gap-2 bg-slate-100 text-slate-700 border border-slate-200 font-bold hover:bg-slate-200 text-xs p-3 rounded-lg text-left transition cursor-pointer"
+                    >
+                      <BookOpen size={14} className="text-emerald-600" />
+                      <span>Baca Edukasi & Berita LPH</span>
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+            <p className="text-[10px] text-slate-400 font-sans italic">
+              *Tekan pintas kerja untuk langsung diarahkan menuju tab manajemen modul terpilih secara instan.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Analytics & Content Ratios Section */}

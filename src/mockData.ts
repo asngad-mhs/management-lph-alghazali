@@ -295,8 +295,7 @@ export const initialSyncConfig: SyncConfig = {
 
 export const defaultUserSession: UserSession = {
   id: "session_01",
-  name: "Dr. H. Asngad, M.Pd",
-  email: "asngad@mhs.unugha.ac.id",
-  role: "Admin",
-  avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150"
+  name: "",
+  email: "",
+  role: "Admin Manager"
 };

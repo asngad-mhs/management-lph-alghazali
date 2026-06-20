@@ -97,31 +97,25 @@ export default function Sidebar({
             </div>
             <div className="flex-1 overflow-hidden">
               <p className="text-xs font-semibold text-slate-200 truncate">{userName}</p>
-              <p className="text-[10px] text-slate-400 font-mono capitalize">Role: {role}</p>
+              <span className="text-[9px] bg-slate-800/80 text-emerald-400 font-bold px-1.5 py-0.5 rounded border border-slate-700/50 min-w-max">
+                {role}
+              </span>
             </div>
           </div>
           
-          <div className="grid grid-cols-2 gap-1.5 bg-slate-900 p-1 rounded-lg border border-slate-800">
-            <button
-              onClick={() => setRole("Admin")}
-              className={`py-1 px-2 rounded text-[11px] font-medium transition ${
-                role === "Admin"
-                  ? "bg-emerald-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-white"
-              }`}
+          <div className="space-y-1">
+            <label className="text-[9px] font-bold text-slate-500 uppercase tracking-wide block">Ganti Role Otoritas:</label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value as UserRole)}
+              className="w-full bg-slate-900 border border-slate-800 text-slate-200 text-xs rounded-lg p-2 focus:outline-none focus:ring-1 focus:ring-emerald-500 font-sans cursor-pointer hover:border-slate-700 transition"
             >
-              ADMIN
-            </button>
-            <button
-              onClick={() => setRole("User")}
-              className={`py-1 px-2 rounded text-[11px] font-medium transition ${
-                role === "User"
-                  ? "bg-emerald-600 text-white shadow-sm"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              USER
-            </button>
+              <option value="Admin Manager">🔑 Admin Manager</option>
+              <option value="Editor">✍️ Editor (Konten)</option>
+              <option value="Auditor">⚖️ Auditor (Kepatuhan)</option>
+              <option value="Staf">📬 Staf (Korespondensi)</option>
+              <option value="User">👁️ User (Spectator)</option>
+            </select>
           </div>
         </div>
 
