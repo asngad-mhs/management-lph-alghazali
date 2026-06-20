@@ -486,6 +486,72 @@ export default function SyncTab({
         </div>
       </div>
 
+      {/* Landing Page Sync Implementation Guide */}
+      <div className="bg-emerald-950/5 border border-emerald-500/20 rounded-2xl p-6 text-slate-800 space-y-4">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">
+            ⚡
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-slate-800 font-sans">
+              Panduan Integrasi Langsung: LPH Al-Ghazali 1 (Landing Pages)
+            </h3>
+            <p className="text-xs text-slate-500">
+              Bagaimana cara menghubungkan landing page untuk berdialog penuh dengan sistem pusat CRUD saat ini.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-sans">
+          <div className="bg-white/80 p-4 border border-slate-200 rounded-xl space-y-2">
+            <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded uppercase font-mono">1. GET: Ambil Content LPH</span>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
+              Landing page cukup memanggil satu API Endpoint di bawah ini untuk mengambil seluruh meta data LPH, tarif pelatihan/layanan, regulasi aktif, berita syiar, dan FAQ sekaligus.
+            </p>
+            <div className="bg-slate-900 text-slate-100 rounded-lg p-3 font-mono text-[10px] overflow-x-auto">
+              {`// Ambil Data LPH Lengkap
+fetch("${typeof window !== "undefined" ? window.location.origin : ""}/api/v1/all")
+  .then(res => res.json())
+  .then(result => {
+    console.log("Profile:", result.data.profile);
+    console.log("Tarif Layanan:", result.data.layanan);
+  });`}
+            </div>
+          </div>
+
+          <div className="bg-white/80 p-4 border border-slate-200 rounded-xl space-y-2">
+            <span className="text-[10px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded uppercase font-mono">2. POST: Kirim Formulir Konsultasi</span>
+            <p className="text-[11px] text-slate-600 leading-relaxed">
+              Ketika ada pengusaha/UMKM melakukan penginputan pada formulir kontak di landing page, kirimkan JSON ini untuk menyimpannya ke Inbox Management secara instan.
+            </p>
+            <div className="bg-slate-900 text-slate-100 rounded-lg p-3 font-mono text-[10px] overflow-x-auto">
+              {`// Submit Inbound Message
+fetch("${typeof window !== "undefined" ? window.location.origin : ""}/api/v1/kontak", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    nama: "CV. Berkah Halal",
+    email: "berkah@halal.id",
+    tujuan: "Layanan Halal",
+    pesan: "Minta tolong kalkulasikan tarif pendampingan mandiri."
+  })
+}).then(res => res.json());`}
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-slate-900 p-4 rounded-xl text-xs space-y-2 text-left text-slate-300">
+          <p className="font-bold text-white flex items-center gap-1">
+            <span>📡</span> Status Koneksi & Gateway Real-time:
+          </p>
+          <ul className="list-disc pl-5 space-y-1 text-slate-400 font-mono text-[11px]">
+            <li>CORS Access-Control-Allow-Origin: <span className="text-emerald-400">"*" (Semua Landing Page Bebeas Mengonsumsi API)</span></li>
+            <li>Enforced Server Port: <span className="text-slate-200">3000 (Standar Cloud Run Container)</span></li>
+            <li>Active Database File: <span className="text-amber-400">/database.json (Persistent Server State)</span></li>
+          </ul>
+        </div>
+      </div>
+
       {/* LOG RESPOND MODAL DISPLAY */}
       <AnimatePresence>
         {selectedLogPayload && (

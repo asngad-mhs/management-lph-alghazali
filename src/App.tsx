@@ -70,10 +70,8 @@ export default function App() {
   const [syncConfig, setSyncConfig] = useState<SyncConfig>(initialSyncConfig);
   const [syncLogs, setSyncLogs] = useState<SyncLog[]>(initialSyncLogs);
 
-  // Load from local storage for durable persistence
+  // Load from local storage first, then fetch live data from Express Server database.json
   useEffect(() => {
-    const keys = ["profile", "layanan", "proses", "regulasi", "berita", "faq", "kontak", "syncConfig", "syncLogs"];
-    
     try {
       const storedProfile = localStorage.getItem("lph_profile");
       if (storedProfile) setProfile(JSON.parse(storedProfile));
@@ -102,13 +100,60 @@ export default function App() {
       const storedSyncLogs = localStorage.getItem("lph_syncLogs");
       if (storedSyncLogs) setSyncLogs(JSON.parse(storedSyncLogs));
     } catch (e) {
-      console.error("Local storage parsing failed, using defaults", e);
+      console.error("Local storage cache load failed", e);
     }
+
+    // Now, retrieve pristine server-side database records
+    fetch("/api/v1/all")
+      .then((res) => {
+        if (!res.ok) throw new Error("HTTP error " + res.status);
+        return res.json();
+      })
+      .then((payload) => {
+        if (payload && payload.status === "success" && payload.data) {
+          const d = payload.data;
+          if (d.profile) { setProfile(d.profile); localStorage.setItem("lph_profile", JSON.stringify(d.profile)); }
+          if (d.layanan) { setLayanan(d.layanan); localStorage.setItem("lph_layanan", JSON.stringify(d.layanan)); }
+          if (d.proses) { setProses(d.proses); localStorage.setItem("lph_proses", JSON.stringify(d.proses)); }
+          if (d.regulasi) { setRegulasi(d.regulasi); localStorage.setItem("lph_regulasi", JSON.stringify(d.regulasi)); }
+          if (d.berita) { setBerita(d.berita); localStorage.setItem("lph_berita", JSON.stringify(d.berita)); }
+          if (d.faq) { setFaq(d.faq); localStorage.setItem("lph_faq", JSON.stringify(d.faq)); }
+          if (d.kontak) { setKontak(d.kontak); localStorage.setItem("lph_kontak", JSON.stringify(d.kontak)); }
+          if (d.syncConfig) { setSyncConfig(d.syncConfig); localStorage.setItem("lph_syncConfig", JSON.stringify(d.syncConfig)); }
+          if (d.syncLogs) { setSyncLogs(d.syncLogs); localStorage.setItem("lph_syncLogs", JSON.stringify(d.syncLogs)); }
+        }
+      })
+      .catch((err) => {
+        console.warn("REST API loading failed (running locally without server or offline). Using cache.", err);
+      });
   }, []);
 
-  // Save changes automatically
+  // Save changes to localStorage AND automatically synchronize to server disk Database JSON
   const saveItem = (key: string, data: any) => {
     localStorage.setItem(`lph_${key}`, JSON.stringify(data));
+
+    // Post state mutation to backend Express server to maintain absolute databases sync
+    fetch("/api/v1/sync", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ [key]: data })
+    })
+    .then((res) => res.json())
+    .then((payload) => {
+      if (payload && payload.status === "success" && payload.log) {
+        // Append server-to-client synced log securely
+        setSyncLogs((prev) => {
+          const logs = [payload.log, ...prev].slice(0, 50);
+          localStorage.setItem("lph_syncLogs", JSON.stringify(logs));
+          return logs;
+        });
+      }
+    })
+    .catch((err) => {
+      console.warn("Could not sync change with Server API", err);
+    });
   };
 
   // State update handlers + Persistence
