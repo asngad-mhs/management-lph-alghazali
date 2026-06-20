@@ -1,0 +1,8 @@
+{
+  "name": "Website Management System LPH Al-Ghazali",
+  "description": "Sistem Manajemen Konten (CMS) terintegrasi untuk LPH Al-Ghazali, mengelola Profil, Layanan, Proses, Regulasi, Berita, FAQ, Kontak, dan integrasi sinkronisasi Api lph alghazali 1.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
