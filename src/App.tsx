@@ -39,6 +39,7 @@ import BeritaTab from "./components/BeritaTab";
 import FaqTab from "./components/FaqTab";
 import KontakTab from "./components/KontakTab";
 import SyncTab from "./components/SyncTab";
+import RolePermissionAlert from "./components/RolePermissionAlert";
 
 import { 
   Building2, 
@@ -57,7 +58,7 @@ import {
 export default function App() {
   // Navigation & Simulation State
   const [activeTab, setActiveTab] = useState<string>("dashboard");
-  const [role, setRole] = useState<UserRole>("Admin");
+  const [role, setRole] = useState<UserRole>("Admin Manager");
 
   // Core CMS persistence states
   const [profile, setProfile] = useState<Profile>(initialProfile);
@@ -443,6 +444,8 @@ export default function App() {
 
         {/* Central main tabs area */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto animate-fadeIn">
+          <RolePermissionAlert role={role} activeTab={activeTab} />
+          
           {activeTab === "dashboard" && (
             <StatsDashboard 
               layanan={layanan}
