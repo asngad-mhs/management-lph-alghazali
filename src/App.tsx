@@ -49,6 +49,7 @@ import BeritaTab from "./components/BeritaTab";
 import FaqTab from "./components/FaqTab";
 import KontakTab from "./components/KontakTab";
 import SyncTab from "./components/SyncTab";
+import LandingPageTab from "./components/LandingPageTab";
 import RolePermissionAlert from "./components/RolePermissionAlert";
 
 import { 
@@ -503,6 +504,25 @@ export default function App() {
               profile={profile}
               onUpdate={handleUpdateProfile}
               isAdmin={canEditProfile}
+            />
+          )}
+
+          {activeTab === "landing" && (
+            <LandingPageTab 
+              profile={profile}
+              layanan={layanan}
+              regulasi={regulasi}
+              berita={berita}
+              faq={faq}
+              onSubmitMessage={(newMsg) => {
+                // Instantly update the parent state / list
+                setKontak((prev) => {
+                  const updated = [newMsg, ...prev];
+                  localStorage.setItem("lph_kontak", JSON.stringify(updated));
+                  return updated;
+                });
+              }}
+              isAdmin={canSync}
             />
           )}
 

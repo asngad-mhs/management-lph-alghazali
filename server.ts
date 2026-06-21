@@ -294,11 +294,18 @@ async function startServer() {
   // Landing Page triggers this endpoint to write user questions into the dashboard
   app.post("/api/v1/kontak", (req, res) => {
     const db = loadDatabase();
-    const item = req.body;
+    const body = req.body;
 
-    if (!item.id) item.id = `msg_${Date.now()}`;
-    if (item.telahDibaca === undefined) item.telahDibaca = false;
-    if (!item.tanggalMasuk) item.tanggalMasuk = new Date().toISOString().split("T")[0];
+    const item: any = {
+      id: body.id || `msg_${Date.now()}`,
+      namaPengirim: body.namaPengirim || body.nama || "Hamba Allah",
+      emailPengirim: body.emailPengirim || body.email || "anon@halal.id",
+      subjek: body.subjek || body.tujuan || "Layanan Halal",
+      pesan: body.pesan || "",
+      tanggalKirim: body.tanggalKirim || body.tanggalMasuk || new Date().toISOString().split("T")[0],
+      telahDibaca: body.telahDibaca !== undefined ? body.telahDibaca : false,
+      balasan: body.balasan || ""
+    };
 
     db.kontak = [item, ...(db.kontak || [])];
     saveDatabase(db);

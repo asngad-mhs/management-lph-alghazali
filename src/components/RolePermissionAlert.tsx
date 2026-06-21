@@ -57,6 +57,17 @@ export default function RolePermissionAlert({ role, activeTab }: RolePermissionP
           allowed: hasProfileEdit
         };
 
+      case "landing":
+        return {
+          title: "Pratinjau Sinkronisasi Landing Page Publik LPH 1",
+          desc: "Halaman web publik interaktif LPH Al-Ghazali 1. Pemilik UMKM/pengunjung dapat mencari info jasa, membaca regulasi, melihat siaran berita, dan mengirim formulir konsultasi secara langsung ke Inbox CMS Anda tanpa jeda.",
+          status: "Sinkronisasi Real-Time Aktif",
+          colorClass: "bg-emerald-50/50 border-emerald-500/20 text-emerald-950",
+          icon: <Unlock size={15} className="text-emerald-600" />,
+          badge: "bg-emerald-100 text-emerald-800",
+          allowed: true
+        };
+
       case "layanan":
         const hasLayananEdit = role === "Admin Manager" || role === "Auditor";
         return {

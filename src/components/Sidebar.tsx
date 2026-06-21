@@ -18,7 +18,8 @@ import {
   ShieldCheck,
   User,
   Menu,
-  X
+  X,
+  Globe
 } from "lucide-react";
 import { motion } from "motion/react";
 import { UserRole } from "../types";
@@ -46,6 +47,7 @@ export default function Sidebar({
 
   const menuItems = [
     { id: "dashboard", label: "Dashboard", icon: BarChart3 },
+    { id: "landing", label: "Web Landing Page", icon: Globe },
     { id: "profile", label: "Profil LPH", icon: Building2 },
     { id: "layanan", label: "Layanan Halal", icon: Briefcase, badge: layananCount },
     { id: "proses", label: "Proses & Tahapan", icon: Workflow },
