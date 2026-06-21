@@ -378,8 +378,8 @@ export default function App() {
   const canEditProfile = role === "Admin Manager" || role === "Editor";
   const canEditLayanan = role === "Admin Manager" || role === "Auditor";
   const canEditProses = role === "Admin Manager" || role === "Auditor";
-  const canEditRegulasi = role === "Admin Manager" || role === "Auditor";
-  const canEditBerita = role === "Admin Manager" || role === "Editor";
+  const canEditRegulasi = true;
+  const canEditBerita = true;
   const canEditFaq = role === "Admin Manager" || role === "Editor";
   const canEditKontak = role === "Admin Manager" || role === "Staf";
   const canSync = role === "Admin Manager";

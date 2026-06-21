@@ -90,35 +90,27 @@ export default function RolePermissionAlert({ role, activeTab }: RolePermissionP
         };
 
       case "regulasi":
-        const hasRegulasiEdit = role === "Admin Manager" || role === "Auditor";
+        const hasRegulasiEdit = true;
         return {
           title: "Sistem Regulasi JPH & 7 Sub-Menu",
-          desc: hasRegulasiEdit
-            ? "Anda memiliki hak akses penuh untuk melakukan semua tindakan CRUD di sub-menu Undang-undang RI, Peraturan Pemerintah, Keputusan Menteri Agama, Keputusan Kepala BPJPH, Peraturan BPOM, Standar Nasional (SNI), dan Fatwa MUI."
-            : `Mode Tinjau. Perubahan draft hukum JPH (seperti UU RI, PP, KMA, Keputusan BPJPH, Peraturan BPOM, SNI, dan Fatwa MUI) hanya diizinkan untuk Admin Manager atau Auditor (saat ini Anda sebagai ${role}).`,
-          status: hasRegulasiEdit ? "Akses Edit Aktif" : "Read-Only (Tergembok)",
-          colorClass: hasRegulasiEdit
-            ? "bg-emerald-50/50 border-emerald-500/20 text-emerald-950"
-            : "bg-amber-50/50 border-amber-500/25 text-amber-900",
-          icon: hasRegulasiEdit ? <Unlock size={15} className="text-emerald-600" /> : <Lock size={15} className="text-amber-600" />,
-          badge: hasRegulasiEdit ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-850",
-          allowed: hasRegulasiEdit
+          desc: "Anda memiliki hak akses penuh ke semua sistem untuk melakukan semua tindakan CRUD (Tambah, Edit, Hapus) di sub-menu Undang-undang RI, Peraturan Pemerintah, Keputusan Menteri Agama, Keputusan Kepala BPJPH, Peraturan BPOM, Standar Nasional (SNI), dan Fatwa MUI.",
+          status: "Akses Edit Penuh Aktif",
+          colorClass: "bg-emerald-50/50 border-emerald-500/20 text-emerald-950",
+          icon: <Unlock size={15} className="text-emerald-600" />,
+          badge: "bg-emerald-100 text-emerald-800",
+          allowed: true
         };
 
       case "berita":
-        const hasBeritaEdit = role === "Admin Manager" || role === "Editor";
+        const hasBeritaEdit = true;
         return {
           title: "Portal Berita & Edukasi Syiar",
-          desc: hasBeritaEdit
-            ? "Hak akses menulis diaktifkan. Anda berwenang merilis siaran pers, artikel edukasi, atau draft pengumuman."
-            : `Mode Tinjau. Pembuatan & perubahan berita diatur secara mutlak oleh Admin Manager atau Editor Humas LPH.`,
-          status: hasBeritaEdit ? "Akses Edit Aktif" : "Read-Only (Tergembok)",
-          colorClass: hasBeritaEdit
-            ? "bg-emerald-50/50 border-emerald-500/20 text-emerald-950"
-            : "bg-amber-50/50 border-amber-500/25 text-amber-900",
-          icon: hasBeritaEdit ? <Unlock size={15} className="text-emerald-600" /> : <Lock size={15} className="text-amber-600" />,
-          badge: hasBeritaEdit ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-850",
-          allowed: hasBeritaEdit
+          desc: "Anda memiliki hak akses penuh ke semua sistem untuk melakukan semua tindakan CRUD (Tambah, Edit, Hapus) di sub-menu Berita utama, Kegiatan, dan Agenda.",
+          status: "Akses Edit Penuh Aktif",
+          colorClass: "bg-emerald-50/50 border-emerald-500/20 text-emerald-950",
+          icon: <Unlock size={15} className="text-emerald-600" />,
+          badge: "bg-emerald-100 text-emerald-800",
+          allowed: true
         };
 
       case "faq":

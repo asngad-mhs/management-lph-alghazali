@@ -46,7 +46,7 @@ export default function BeritaTab({
   const [formItem, setFormItem] = useState<Partial<Berita>>({});
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
 
-  const categories = ["Semua", "Edukasi", "Kegiatan", "Pengumuman", "Opini"];
+  const categories = ["Semua", "Berita utama", "Kegiatan", "Agenda"];
   
   // Filtered list
   const filteredList = berita.filter((item) => {
@@ -70,7 +70,7 @@ export default function BeritaTab({
         konten: "",
         penulis: "Admin Humas LPH",
         tanggalPublikasi: new Date().toISOString().split("T")[0],
-        kategori: "Edukasi",
+        kategori: "Berita utama",
         status: "Draft",
         gambarUrl: "https://images.unsplash.com/photo-1542435503-956c469947f6?auto=format&fit=crop&q=80&w=400",
         views: 0
@@ -401,14 +401,13 @@ export default function BeritaTab({
                   <div className="space-y-1">
                     <label className="font-semibold text-slate-500">Kategori</label>
                     <select
-                      value={formItem.kategori || "Edukasi"}
+                      value={formItem.kategori || "Berita utama"}
                       onChange={(e) => setFormItem(prev => ({ ...prev, kategori: e.target.value as any }))}
-                      className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                      className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-emerald-500 font-medium text-slate-800"
                     >
-                      <option value="Edukasi">Edukasi</option>
+                      <option value="Berita utama">Berita utama</option>
                       <option value="Kegiatan">Kegiatan</option>
-                      <option value="Pengumuman">Pengumuman</option>
-                      <option value="Opini">Opini</option>
+                      <option value="Agenda">Agenda</option>
                     </select>
                   </div>
 

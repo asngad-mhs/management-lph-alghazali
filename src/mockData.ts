@@ -300,7 +300,7 @@ export const initialBerita: Berita[] = [
     konten: "Bahan pembuatan kue atau roti (bakery) sekilas tampak tidak memiliki titik kritis karena didominasi tepung dan gula. Namun, dalam tinjauan LPH Al-Ghazali, terdapat beberapa bahan yang sangat kritis:\n\n1. Ragi/Khamir (Yeast): Terkadang membutuhkan nutrisi yang diaktifkan dengan enzim dari usus hewan.\n2. Kuas pengoles mentega (Kuas bulu): Sering kali kuas bulu impor berbahan babi (bristle). Gantilah dengan kuas silikon.\n3. Pewarna makanan & Emulsifier: Pelembut kue lecithin sering diekstrak dari jaringan babi atau sapi non-syar'i.\n\nDisarankan para pelaku usaha teliti memilih merk ragi dan margarin yang sudah jelas memiliki ketetapan halal dari BPJPH demi ketenangan rohani konsumen.",
     penulis: "Ustadz H. Ahmad Amin, M.Si (Auditor)",
     tanggalPublikasi: "2026-06-05",
-    kategori: "Edukasi",
+    kategori: "Berita utama",
     status: "Dipublikasikan",
     gambarUrl: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=400",
     views: 412
@@ -312,7 +312,7 @@ export const initialBerita: Berita[] = [
     konten: "Menyambut bulan suci Ramadhan, pengurus LPH Al-Ghazali memberitahukan penyesuaian jadwal operasional auditor. Seluruh kegiatan klarifikasi bahan baku dan visitasi pabrik tetap dilangsungkan dengan penyesuaian jam kerja mulai pukul 08.00 hingga 14.30 WIB.\n\nPendaftaran melingkupi UMKM wilayah eks-Karesidenan Banyumas dapat menyertakan berkas koordinasi agar kunjungan auditor dilakukan secara serentak, mengurangi beban transportasi pendaftaran mandiri pelaku usaha.",
     penulis: "Sekretariat LPH",
     tanggalPublikasi: "2026-06-18",
-    kategori: "Pengumuman",
+    kategori: "Agenda",
     status: "Draft",
     gambarUrl: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&q=80&w=400",
     views: 0

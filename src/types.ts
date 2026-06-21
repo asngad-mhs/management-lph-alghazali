@@ -159,7 +159,7 @@ export interface Berita {
   konten: string;
   penulis: string;
   tanggalPublikasi: string;
-  kategori: "Edukasi" | "Kegiatan" | "Pengumuman" | "Opini";
+  kategori: "Berita utama" | "Kegiatan" | "Agenda" | "Edukasi" | "Pengumuman" | "Opini";
   status: "Dipublikasikan" | "Draft";
   gambarUrl?: string;
   views: number;
