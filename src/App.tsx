@@ -14,7 +14,10 @@ import {
   Kontak, 
   SyncConfig, 
   SyncLog, 
-  UserRole 
+  UserRole,
+  PendaftaranSertifikatHalal,
+  SertifikatHalalRecord,
+  AuditJadwal
 } from "./types";
 import { 
   initialProfile, 
@@ -26,7 +29,10 @@ import {
   initialKontak, 
   initialSyncLogs, 
   initialSyncConfig, 
-  defaultUserSession 
+  defaultUserSession,
+  initialPendaftaran,
+  initialSertifikatRecords,
+  initialAuditJadwal
 } from "./mockData";
 
 import Sidebar from "./components/Sidebar";
@@ -71,6 +77,11 @@ export default function App() {
   const [syncConfig, setSyncConfig] = useState<SyncConfig>(initialSyncConfig);
   const [syncLogs, setSyncLogs] = useState<SyncLog[]>(initialSyncLogs);
 
+  // New submenus for Layanan Halal (CRUD)
+  const [pendaftaran, setPendaftaran] = useState<PendaftaranSertifikatHalal[]>(initialPendaftaran);
+  const [sertifikatRecords, setSertifikatRecords] = useState<SertifikatHalalRecord[]>(initialSertifikatRecords);
+  const [auditJadwal, setAuditJadwal] = useState<AuditJadwal[]>(initialAuditJadwal);
+
   // Load from local storage first, then fetch live data from Express Server database.json
   useEffect(() => {
     try {
@@ -100,6 +111,15 @@ export default function App() {
 
       const storedSyncLogs = localStorage.getItem("lph_syncLogs");
       if (storedSyncLogs) setSyncLogs(JSON.parse(storedSyncLogs));
+
+      const storedPendaftaran = localStorage.getItem("lph_pendaftaran");
+      if (storedPendaftaran) setPendaftaran(JSON.parse(storedPendaftaran));
+
+      const storedSertifikatRecords = localStorage.getItem("lph_sertifikatRecords");
+      if (storedSertifikatRecords) setSertifikatRecords(JSON.parse(storedSertifikatRecords));
+
+      const storedAuditJadwal = localStorage.getItem("lph_auditJadwal");
+      if (storedAuditJadwal) setAuditJadwal(JSON.parse(storedAuditJadwal));
     } catch (e) {
       console.error("Local storage cache load failed", e);
     }
@@ -478,6 +498,21 @@ export default function App() {
               onCreate={handleCreateLayanan}
               onUpdate={handleUpdateLayanan}
               onDelete={handleDeleteLayanan}
+              pendaftaran={pendaftaran}
+              onUpdatePendaftaran={(data) => {
+                setPendaftaran(data);
+                saveItem("pendaftaran", data);
+              }}
+              sertifikatRecords={sertifikatRecords}
+              onUpdateSertifikatRecords={(data) => {
+                setSertifikatRecords(data);
+                saveItem("sertifikatRecords", data);
+              }}
+              auditJadwal={auditJadwal}
+              onUpdateAuditJadwal={(data) => {
+                setAuditJadwal(data);
+                saveItem("auditJadwal", data);
+              }}
               isAdmin={canEditLayanan}
             />
           )}

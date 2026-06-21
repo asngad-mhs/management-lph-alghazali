@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Profile, Layanan, Proses, Regulasi, Berita, FAQ, Kontak, SyncConfig, SyncLog, UserSession } from "./types";
+import { Profile, Layanan, Proses, Regulasi, Berita, FAQ, Kontak, SyncConfig, SyncLog, UserSession, PendaftaranSertifikatHalal, SertifikatHalalRecord, AuditJadwal } from "./types";
 
 export const initialProfile: Profile = {
   id: "prof_01",
@@ -24,6 +24,76 @@ export const initialProfile: Profile = {
     "Mengembangkan kapasitas laboratorium pendukung uji kehalalan yang mutakhir.",
     "Memberikan pelayanan prima dan edukasi sertifikasi halal kepada pelaku usaha (UMKM) maupun industri besar.",
     "Bekerja sama dengan berbagai stakeholders dalam mendorong percepatan ekosistem halal nasional."
+  ],
+  sejarah: "Lembaga Pemeriksa Halal (LPH) Al-Ghazali didirikan sebagai wujud kepedulian sivitas akademika Universitas Islam Al-Ghazali (UNUGHA) Cilacap terhadap percepatan program jaminan produk halal di Indonesia. Berdiri resmi pada Agustus 2023 melalui SK Penetapan Badan Penyelenggara Jaminan Produk Halal (BPJPH), LPH Al-Ghazali berkomitmen melayani pemeriksaan dan pendampingan halal yang akuntabel, independen, dan terpercaya bagi sektor usaha mikro, kecil, menengah (UMKM) maupun industri manufaktur skala nasional.",
+  kebijakanMutu: "LPH Al-Ghazali menerapkan Sistem Jaminan Mutu Pemeriksaan Halal yang berorientasi pada kepatuhan syariat, integritas ilmiah, kejujuran profesional, kerahasiaan data pelanggan, serta kecepatan proses layanan tanpa kompromi demi mewujudkan kepuasan pelaku usaha dan ketenteraman umat.",
+  sasaranMutu: [
+    "Ketepatan waktu penyelesaian laporan audit lapangan maksimal 14 hari kerja sejak penunjukan.",
+    "Tingkat nilai kepuasan pelaku usaha (UMKM) terhadap keramahan dan kejelasan layanan minimal 92%.",
+    "Nol keluhan perilaku tidak etis atau pelanggaran integritas (gratifikasi/suap) oleh seluruh personil LPH.",
+    "Pelaksanaan bimbingan teknik dan sosialiasi edukasi halal minimal 4 kali dalam satu tahun operasional."
+  ],
+  strukturOrganisasiDesc: "Struktur kepengurusan LPH Al-Ghazali disusun secara profesional dan ramping untuk menjamin efisiensi alur kerja. Struktur dipimpin oleh Kepala LPH, dikontrol oleh Komite Syariat / Komite Fatwa, Auditor Kepala, Bidang Operasional Administrasi & Pelayanan, serta didukung oleh Peneliti Laboratorium Terpadu UNUGHA.",
+  strukturOrganisasiImg: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800",
+  auditors: [
+    {
+      id: "aud_01",
+      nama: "Ir. H. Syarifuddin, M.Si",
+      regNo: "REG-AUD-BPJPH-2512941",
+      keahlian: "Rumpun Makanan Olahan, Kimia, Bahan Tambahan Makanan (BTM)",
+      status: "Aktif"
+    },
+    {
+      id: "aud_02",
+      nama: "Dr. Hj. Siti Aminah, M.Pd",
+      regNo: "REG-AUD-BPJPH-2301102",
+      keahlian: "Rumpun Pertanian, Produk Hewani, Ritel & Logistik",
+      status: "Aktif"
+    },
+    {
+      id: "aud_03",
+      nama: "Kurniawan Azis, S.TP, M.Sc",
+      regNo: "REG-AUD-BPJPH-2615438",
+      keahlian: "Teknologi Hasil Pertanian, Rumpun Minuman & Herbal, Kosmetik",
+      status: "Aktif"
+    }
+  ],
+  sdmSyariah: [
+    {
+      id: "sdm_01",
+      nama: "K.H. Dr. Sahal Ghazali, Lc, M.A",
+      peran: "Dewan Kehormatan / Komite Syariat LPH",
+      sertifikasi: "Rekomendasi Dewan Syariah Nasional (DSN-MUI) No. DSN-493/DPS/XII/2022"
+    },
+    {
+      id: "sdm_02",
+      nama: "Ahmad Musthofa, M.H.I",
+      peran: "Ahli Fikih Produk Halal / Perumus Kebijakan",
+      sertifikasi: "Sertifikasi Kompetensi Ahli Syariah Jaminan Produk Halal JPH-SYR-031"
+    }
+  ],
+  kerjasamaList: [
+    {
+      id: "ks_01",
+      instansi: "Dinas Koperasi, Usaha Kecil Menengah dan Perdagangan Kab. Cilacap",
+      jenis: "Penyelenggaraan Sertifikasi Halal Gratis (SEHATI) Reguler UMKM Binaan Daerah",
+      tanggal: "2024-02-15",
+      status: "Berjalan"
+    },
+    {
+      id: "ks_02",
+      instansi: "Lembaga Pemeriksa Halal (LPH) Universitas Airlangga (UNAIR)",
+      jenis: "Aliansi Pengujian Laboratorium Kimia & Titik Kritis Enzimatis",
+      tanggal: "2024-05-18",
+      status: "Berjalan"
+    },
+    {
+      id: "ks_03",
+      instansi: "Asosiasi Industri UMKM Pengolah Makanan Eks-Karesidenan Banyumas",
+      jenis: "Edukasi Berkelanjutan, Pelatihan Penyelia Halal, & Konsultasi Pra-Audit",
+      tanggal: "2024-09-01",
+      status: "Berjalan"
+    }
   ]
 };
 
@@ -299,3 +369,99 @@ export const defaultUserSession: UserSession = {
   email: "",
   role: "Admin Manager"
 };
+
+export const initialPendaftaran: PendaftaranSertifikatHalal[] = [
+  {
+    id: "reg_01",
+    namaPerusahaan: "Rempah Sari Barokah",
+    namaProduk: "Sambal Pecel Blitar & Serundeng Gurih",
+    tanggalDaftar: "2026-06-05",
+    jenisProduk: "Makanan Olahan",
+    nomorKontak: "0813-9876-5432",
+    status: "Diproses"
+  },
+  {
+    id: "reg_02",
+    namaPerusahaan: "Susu Kedelai Al-Barokah UNUGHA",
+    namaProduk: "Sari Kedelai Rasa Melon & Cokelat",
+    tanggalDaftar: "2026-06-12",
+    jenisProduk: "Minuman Kemasan",
+    nomorKontak: "0857-4444-2222",
+    status: "Diproses"
+  },
+  {
+    id: "reg_03",
+    namaPerusahaan: "Bakso Krikil Mas Prianto",
+    namaProduk: "Bakso Sapi Beku & Bumbu Kaldu Kuah",
+    tanggalDaftar: "2026-06-18",
+    jenisProduk: "Daging & Produk Olahan",
+    nomorKontak: "0821-3355-7799",
+    status: "Draf"
+  },
+  {
+    id: "reg_04",
+    namaPerusahaan: "Krupuk Tengiri Maju Lestari",
+    namaProduk: "Krupuk Tengiri Renyah Khas Cilacap",
+    tanggalDaftar: "2026-05-20",
+    jenisProduk: "Makanan Olahan / Snacking",
+    nomorKontak: "0899-7777-8888",
+    status: "Selesai"
+  }
+];
+
+export const initialSertifikatRecords: SertifikatHalalRecord[] = [
+  {
+    id: "cert_01",
+    nomorSertifikat: "ID33110000456210323",
+    namaPerusahaan: "Ayam Goreng Penyet Bu Laras",
+    namaProduk: "Ayam Goreng, Bebek Bakar, Sambal Bawang",
+    tanggalTerbit: "2024-03-24",
+    tanggalKadaluarsa: "2028-03-24",
+    status: "Berlaku"
+  },
+  {
+    id: "cert_02",
+    nomorSertifikat: "ID33210001890450524",
+    namaPerusahaan: "Kopi Robusta Lereng Slamet",
+    namaProduk: "Kopi Bubuk Murni Robusta & Arabika",
+    tanggalTerbit: "2024-05-12",
+    tanggalKadaluarsa: "2028-05-12",
+    status: "Berlaku"
+  },
+  {
+    id: "cert_03",
+    nomorSertifikat: "ID33120000109981123",
+    namaPerusahaan: "Catering Berkah Barokah",
+    namaProduk: "Nasi Box, Tumpeng Kuning, Kue Basah Layanan",
+    tanggalTerbit: "2023-11-15",
+    tanggalKadaluarsa: "2027-11-15",
+    status: "Berlaku"
+  }
+];
+
+export const initialAuditJadwal: AuditJadwal[] = [
+  {
+    id: "audj_01",
+    namaPerusahaan: "Rempah Sari Barokah",
+    tanggalAudit: "2026-06-25",
+    lokasi: "Jl. Diponegoro No. 84, Cilacap",
+    auditorPenanggungJawab: "Ir. H. Syarifuddin, M.Si",
+    status: "Terjadwal"
+  },
+  {
+    id: "audj_02",
+    namaPerusahaan: "Susu Kedelai Al-Barokah UNUGHA",
+    tanggalAudit: "2026-06-23",
+    lokasi: "Kantin Terpadu Kampus UNUGHA Cilacap",
+    auditorPenanggungJawab: "Kurniawan Azis, S.TP, M.Sc",
+    status: "Terjadwal"
+  },
+  {
+    id: "audj_03",
+    namaPerusahaan: "Krupuk Tengiri Maju Lestari",
+    tanggalAudit: "2026-05-25",
+    lokasi: "SDA Industri Nelayan Cilacap Selatan",
+    auditorPenanggungJawab: "Dr. Hj. Siti Aminah, M.Pd",
+    status: "Laporan Selesai"
+  }
+];

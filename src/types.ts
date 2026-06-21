@@ -13,6 +13,29 @@ export interface UserSession {
   avatar?: string;
 }
 
+export interface AuditorHalalItem {
+  id: string;
+  nama: string;
+  regNo: string;
+  keahlian: string;
+  status: "Aktif" | "Nonaktif";
+}
+
+export interface SDMSyariahItem {
+  id: string;
+  nama: string;
+  peran: string;
+  sertifikasi: string;
+}
+
+export interface KerjasamaItem {
+  id: string;
+  instansi: string;
+  jenis: string;
+  tanggal: string;
+  status: "Berjalan" | "Selesai" | "Draf";
+}
+
 export interface Profile {
   id: string;
   name: string;
@@ -28,6 +51,14 @@ export interface Profile {
   website: string;
   vision: string;
   mission: string[];
+  sejarah?: string;
+  kebijakanMutu?: string;
+  sasaranMutu?: string[];
+  strukturOrganisasiDesc?: string;
+  strukturOrganisasiImg?: string;
+  auditors?: AuditorHalalItem[];
+  sdmSyariah?: SDMSyariahItem[];
+  kerjasamaList?: KerjasamaItem[];
 }
 
 export interface Layanan {
@@ -39,6 +70,35 @@ export interface Layanan {
   estimasiHari: number;
   biayaNominal: number;
   persyaratan: string[]; // List of requirements
+}
+
+export interface PendaftaranSertifikatHalal {
+  id: string;
+  namaPerusahaan: string;
+  namaProduk: string;
+  tanggalDaftar: string;
+  jenisProduk: string;
+  nomorKontak: string;
+  status: "Draf" | "Diproses" | "Selesai" | "Ditolak";
+}
+
+export interface SertifikatHalalRecord {
+  id: string;
+  nomorSertifikat: string;
+  namaPerusahaan: string;
+  namaProduk: string;
+  tanggalTerbit: string;
+  tanggalKadaluarsa: string;
+  status: "Berlaku" | "Kadaluarsa";
+}
+
+export interface AuditJadwal {
+  id: string;
+  namaPerusahaan: string;
+  tanggalAudit: string;
+  lokasi: string;
+  auditorPenanggungJawab: string;
+  status: "Terjadwal" | "Sedang Audit" | "Laporan Selesai";
 }
 
 export interface Proses {

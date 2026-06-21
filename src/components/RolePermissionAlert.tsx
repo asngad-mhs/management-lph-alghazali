@@ -44,10 +44,10 @@ export default function RolePermissionAlert({ role, activeTab }: RolePermissionP
       case "profile":
         const hasProfileEdit = role === "Admin Manager" || role === "Editor";
         return {
-          title: "Profil Kelembagaan LPH",
+          title: "Profil & Hak Akses Penuh Submenu Kelembagaan",
           desc: hasProfileEdit
-            ? "Anda memiliki hak akses untuk memodifikasi Visi, Misi, Alamat, SK Kemenag, dan Status Akreditasi LPH."
-            : `Mode Tinjau. Perubahan hanya diperbolehkan untuk Admin Manager atau Editor (saat ini Anda sebagai ${role}).`,
+            ? "Anda memiliki hak akses CRUD penuh untuk delapan sub-layanan: Profil LPH, Sejarah, Visi Misi, Kebijakan/Sasaran Mutu, Struktur Organisasi, Auditor Halal, SDM Syariah, dan partner Kerjasama."
+            : `Mode Tinjau. Perubahan 8 submenu profil hanya diperbolehkan untuk Admin Manager atau Editor (saat ini Anda sebagai ${role}).`,
           status: hasProfileEdit ? "Akses Edit Aktif" : "Read-Only (Tergembok)",
           colorClass: hasProfileEdit
             ? "bg-emerald-50/50 border-emerald-500/20 text-emerald-950"
@@ -60,10 +60,10 @@ export default function RolePermissionAlert({ role, activeTab }: RolePermissionP
       case "layanan":
         const hasLayananEdit = role === "Admin Manager" || role === "Auditor";
         return {
-          title: "Katalog & Tarif Layanan Halal",
+          title: "Layanan Halal & Hak Akses Penuh Submenu",
           desc: hasLayananEdit
-            ? "Anda diizinkan menambah, mengubah spesifikasi, dan melakukan penyesuaian nominal tarif sertifikasi."
-            : `Mode Tinjau. Penyesuaian skema biaya & layanan wajib dilakukan oleh Admin Manager atau Auditor.`,
+            ? "Anda memiliki hak akses penuh untuk melakukan semua manajemen CRUD di empat sub-layanan: Pendaftaran Sertifikat Halal, Ruang Lingkup & Layanan Pemeriksaan Halal, Pencarian Sertifikasi Halal, dan Daftar Audit."
+            : `Mode Tinjau. Perubahan 4 submenu layanan halal hanya diperbolehkan untuk Admin Manager atau Auditor (saat ini Anda sebagai ${role}).`,
           status: hasLayananEdit ? "Akses Edit Aktif" : "Read-Only (Tergembok)",
           colorClass: hasLayananEdit
             ? "bg-emerald-50/50 border-emerald-500/20 text-emerald-950"
