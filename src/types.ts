@@ -111,6 +111,26 @@ export interface Proses {
   statusKritikal: "Tinggi" | "Sedang" | "Rendah";
 }
 
+export interface TanggungGugatRecord {
+  id: string;
+  nomorKasus: string;
+  subjek: string;
+  deskripsi: string;
+  tanggalPengajuan: string;
+  pihakPelakuUsaha: string;
+  status: "Diterima" | "Proses Investigasi" | "Sidang Komite" | "Selesai Solusi";
+  tindakanLph?: string;
+}
+
+export interface TarifLayananRecord {
+  id: string;
+  namaSkema: string;
+  kategoriUsaha: "Usaha Mikro & Kecil (UMK)" | "Usaha Menengah" | "Usaha Besar" | "Luar Negeri / Internasional";
+  tarifDasar: number;
+  tarifTransportasi: number;
+  keterangan: string;
+}
+
 export interface Regulasi {
   id: string;
   nomorAturan: string;

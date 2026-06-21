@@ -76,10 +76,10 @@ export default function RolePermissionAlert({ role, activeTab }: RolePermissionP
       case "proses":
         const hasProsesEdit = role === "Admin Manager" || role === "Auditor";
         return {
-          title: "Skema Proses & Tahapan",
+          title: "Proses, Tahapan, Tanggung Gugat & Tarif Layanan",
           desc: hasProsesEdit
-            ? "Anda memiliki kontrol penuh untuk menyusun alur pengujian material halal ditiap langkah audit."
-            : `Mode Tinjau. Standardisasi alur sertifikasi halal hanya dapat diubah oleh Admin atau Auditor.`,
+            ? "Anda memiliki hak akses penuh untuk melakukan semua CRUD di sub-menu Alur Sertifikasi, Prosedur Tanggung Gugat, dan Tarif Layanan Resmi."
+            : `Mode Tinjau. Perubahan 3 submenu proses & tahapan hanya diperbolehkan untuk Admin Manager atau Auditor (saat ini Anda sebagai ${role}).`,
           status: hasProsesEdit ? "Akses Edit Aktif" : "Read-Only (Tergembok)",
           colorClass: hasProsesEdit
             ? "bg-emerald-50/50 border-emerald-500/20 text-emerald-950"

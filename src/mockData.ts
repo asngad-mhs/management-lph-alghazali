@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Profile, Layanan, Proses, Regulasi, Berita, FAQ, Kontak, SyncConfig, SyncLog, UserSession, PendaftaranSertifikatHalal, SertifikatHalalRecord, AuditJadwal } from "./types";
+import { Profile, Layanan, Proses, Regulasi, Berita, FAQ, Kontak, SyncConfig, SyncLog, UserSession, PendaftaranSertifikatHalal, SertifikatHalalRecord, AuditJadwal, TanggungGugatRecord, TarifLayananRecord } from "./types";
 
 export const initialProfile: Profile = {
   id: "prof_01",
@@ -465,3 +465,72 @@ export const initialAuditJadwal: AuditJadwal[] = [
     status: "Laporan Selesai"
   }
 ];
+
+export const initialTanggungGugat: TanggungGugatRecord[] = [
+  {
+    id: "tg_01",
+    nomorKasus: "TG-2026-001",
+    subjek: "Keterlambatan Pengiriman Laporan Hasil Pemeriksaan",
+    deskripsi: "Pelaku usaha menyatakan keberatan karena hasil evaluasi kecocokan bahan kritis memakan waktu 3 minggu melebihi SOP 14 hari.",
+    tanggalPengajuan: "2026-06-10",
+    pihakPelakuUsaha: "CV. Makmur Kuliner Nusantara",
+    status: "Proses Investigasi",
+    tindakanLph: "Sedang diklarifikasi dengan Lab mitra pengujian biologi molekuler halal rujukan."
+  },
+  {
+    id: "tg_02",
+    nomorKasus: "TG-2026-002",
+    subjek: "Ketidaksesuaian Hasil Rekomendasi Auditor",
+    deskripsi: "Keberatan atas status penundaan akibat temuan kuas bulu babi pada panggangan roti yang diklaim pelaku usaha sebagai kuas nilon sintetis.",
+    tanggalPengajuan: "2026-06-15",
+    pihakPelakuUsaha: "Sari Roti Barokah Cilacap",
+    status: "Sidang Komite",
+    tindakanLph: "Dilakukan pengujian sampel kuas di laboratorium independen universitas untuk uji FTIR protein keratin bulu hewan."
+  },
+  {
+    id: "tg_03",
+    nomorKasus: "TG-2026-003",
+    subjek: "Keberatan Selisih Biaya Akomodasi Lapangan",
+    deskripsi: "Komplain mengenai penagihan tambahan biaya transportasi penyeberangan kapal ke Pulau Nusakambangan yang tidak tercantum di rincian awal.",
+    tanggalPengajuan: "2026-05-18",
+    pihakPelakuUsaha: "Koperasi Nelayan Mina Bahari",
+    status: "Selesai Solusi",
+    tindakanLph: "LPH menyetujui penghapusan biaya tambahan selisih penyeberangan karena kelalaian administrasi estimasi awal."
+  }
+];
+
+export const initialTarifLayanan: TarifLayananRecord[] = [
+  {
+    id: "tf_01",
+    namaSkema: "Sertifikasi Halal Reguler - Jalur Mandiri",
+    kategoriUsaha: "Usaha Mikro & Kecil (UMK)",
+    tarifDasar: 350000,
+    tarifTransportasi: 150000,
+    keterangan: "Tarif resmi BPJPH sesuai PMK No.57/2021 untuk pendaftaran mandiri non-subsidi."
+  },
+  {
+    id: "tf_02",
+    namaSkema: "Pemeriksaan Halal Bahan Olahan Hewani",
+    kategoriUsaha: "Usaha Menengah",
+    tarifDasar: 1500000,
+    tarifTransportasi: 500000,
+    keterangan: "Mencakup pemetaan rumah potong hewan asal dan verifikasi halal 3 lapis rantai pasok bumbu hidrolisat protein."
+  },
+  {
+    id: "tf_03",
+    namaSkema: "Pemeriksaan Halal Multi-Plant & Produk Kompleks",
+    kategoriUsaha: "Usaha Besar",
+    tarifDasar: 3000000,
+    tarifTransportasi: 1000000,
+    keterangan: "Audit lini pabrik otomatis terpisah, pengujian sampel PCR wajib unt kandungan babi / alkohol tinggi, & 5+ cabang distribusi."
+  },
+  {
+    id: "tf_04",
+    namaSkema: "Pemeriksaan Halal RPH / RPU Sertifikasi Ekspor",
+    kategoriUsaha: "Luar Negeri / Internasional",
+    tarifDasar: 5000000,
+    tarifTransportasi: 2500000,
+    keterangan: "Audit pemeriksaan rumah sembelih hewan skala ekspor dengan standar AS/NZS & ISO/IEC 17025."
+  }
+];
+

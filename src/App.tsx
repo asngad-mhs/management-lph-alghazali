@@ -17,7 +17,9 @@ import {
   UserRole,
   PendaftaranSertifikatHalal,
   SertifikatHalalRecord,
-  AuditJadwal
+  AuditJadwal,
+  TanggungGugatRecord,
+  TarifLayananRecord
 } from "./types";
 import { 
   initialProfile, 
@@ -32,7 +34,9 @@ import {
   defaultUserSession,
   initialPendaftaran,
   initialSertifikatRecords,
-  initialAuditJadwal
+  initialAuditJadwal,
+  initialTanggungGugat,
+  initialTarifLayanan
 } from "./mockData";
 
 import Sidebar from "./components/Sidebar";
@@ -82,6 +86,10 @@ export default function App() {
   const [sertifikatRecords, setSertifikatRecords] = useState<SertifikatHalalRecord[]>(initialSertifikatRecords);
   const [auditJadwal, setAuditJadwal] = useState<AuditJadwal[]>(initialAuditJadwal);
 
+  // New submenus for Proses & Tahapan (CRUD)
+  const [tanggungGugat, setTanggungGugat] = useState<TanggungGugatRecord[]>(initialTanggungGugat);
+  const [tarifLayanan, setTarifLayanan] = useState<TarifLayananRecord[]>(initialTarifLayanan);
+
   // Load from local storage first, then fetch live data from Express Server database.json
   useEffect(() => {
     try {
@@ -120,6 +128,12 @@ export default function App() {
 
       const storedAuditJadwal = localStorage.getItem("lph_auditJadwal");
       if (storedAuditJadwal) setAuditJadwal(JSON.parse(storedAuditJadwal));
+
+      const storedTanggungGugat = localStorage.getItem("lph_tanggungGugat");
+      if (storedTanggungGugat) setTanggungGugat(JSON.parse(storedTanggungGugat));
+
+      const storedTarifLayanan = localStorage.getItem("lph_tarifLayanan");
+      if (storedTarifLayanan) setTarifLayanan(JSON.parse(storedTarifLayanan));
     } catch (e) {
       console.error("Local storage cache load failed", e);
     }
@@ -524,6 +538,16 @@ export default function App() {
               onUpdate={handleUpdateProses}
               onDelete={handleDeleteProses}
               onReorder={handleReorderProses}
+              tanggungGugat={tanggungGugat}
+              onUpdateTanggungGugat={(data) => {
+                setTanggungGugat(data);
+                saveItem("tanggungGugat", data);
+              }}
+              tarifLayanan={tarifLayanan}
+              onUpdateTarifLayanan={(data) => {
+                setTarifLayanan(data);
+                saveItem("tarifLayanan", data);
+              }}
               isAdmin={canEditProses}
             />
           )}
