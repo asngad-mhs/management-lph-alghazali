@@ -137,7 +137,17 @@ export interface Regulasi {
   tentang: string;
   tahun: number;
   sumber: string; // e.g., "UU RI", "PMA", "Keputusan Kepala BPJPH"
-  kategori: "Undang-Undang" | "SOP Internal" | "Peraturan Menteri" | "Keputusan BPJPH";
+  kategori: 
+    | "Undang-undang RI" 
+    | "Peraturan Pemerintah" 
+    | "Keputusan Menteri Agama" 
+    | "Keputusan Kepala BPJPH" 
+    | "Peraturan BPOM" 
+    | "Standar Nasional (SNI)" 
+    | "Fatwa MUI" 
+    | "Undang-Undang" 
+    | "SOP Internal" 
+    | "Peraturan Menteri";
   statusBerlaku: boolean;
   linkDokumen: string;
 }

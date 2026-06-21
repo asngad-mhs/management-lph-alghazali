@@ -41,7 +41,16 @@ export default function RegulasiTab({
   const [formItem, setFormItem] = useState<Partial<Regulasi>>({});
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
 
-  const categories = ["Semua", "Undang-Undang", "SOP Internal", "Peraturan Menteri", "Keputusan BPJPH"];
+  const categories = [
+    "Semua",
+    "Undang-undang RI",
+    "Peraturan Pemerintah",
+    "Keputusan Menteri Agama",
+    "Keputusan Kepala BPJPH",
+    "Peraturan BPOM",
+    "Standar Nasional (SNI)",
+    "Fatwa MUI"
+  ];
 
   // Filter list
   const filteredList = regulasi.filter((item) => {
@@ -63,7 +72,7 @@ export default function RegulasiTab({
         tentang: "",
         tahun: new Date().getFullYear(),
         sumber: "BPJPH Kemenag RI",
-        kategori: "Keputusan BPJPH",
+        kategori: "Keputusan Kepala BPJPH",
         statusBerlaku: true,
         linkDokumen: "#"
       });
@@ -318,14 +327,19 @@ export default function RegulasiTab({
                   <div className="space-y-1">
                     <label className="font-semibold text-slate-500">Kategori Dokumen</label>
                     <select
-                      value={formItem.kategori || "Keputusan BPJPH"}
+                      value={formItem.kategori || "Keputusan Kepala BPJPH"}
                       onChange={(e) => setFormItem(prev => ({ ...prev, kategori: e.target.value as any }))}
                       className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-lg font-medium focus:outline-none focus:ring-1 focus:ring-emerald-500"
                     >
-                      <option value="Undang-Undang">Undang-Undang</option>
-                      <option value="Peraturan Menteri">Peraturan Menteri</option>
-                      <option value="Keputusan BPJPH">Keputusan BPJPH</option>
+                      <option value="Undang-undang RI">Undang-undang RI</option>
+                      <option value="Peraturan Pemerintah">Peraturan Pemerintah</option>
+                      <option value="Keputusan Menteri Agama">Keputusan Menteri Agama</option>
+                      <option value="Keputusan Kepala BPJPH">Keputusan Kepala BPJPH</option>
+                      <option value="Peraturan BPOM">Peraturan BPOM</option>
+                      <option value="Standar Nasional (SNI)">Standar Nasional (SNI)</option>
+                      <option value="Fatwa MUI">Fatwa MUI</option>
                       <option value="SOP Internal">SOP Internal</option>
+                      <option value="Peraturan Menteri">Peraturan Menteri</option>
                     </select>
                   </div>
 

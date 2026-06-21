@@ -237,7 +237,7 @@ export default function SyncTab({
             tentang: "string",
             tahun: "number",
             sumber: "string",
-            kategori: "enum (Undang-Undang, SOP Internal, Peraturan Menteri, Keputusan BPJPH)",
+            kategori: "enum (Undang-undang RI, Peraturan Pemerintah, Keputusan Menteri Agama, Keputusan Kepala BPJPH, Peraturan BPOM, Standar Nasional (SNI), Fatwa MUI)",
             statusBerlaku: "boolean",
             linkDokumen: "stringURL"
           }

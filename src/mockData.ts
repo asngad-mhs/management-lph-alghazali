@@ -211,42 +211,72 @@ export const initialRegulasi: Regulasi[] = [
   {
     id: "reg_01",
     nomorAturan: "Undang-Undang No. 33 Tahun 2014",
-    tentang: "Jaminan Produk Halal (JPH) yang mewajibkan seluruh produk yang beredar di wilayah RI bersertifikasi halal secara bertahap.",
+    tentang: "Jaminan Produk Halal (JPH) yang menyelenggarakan regulasi wajib sertifikasi halal untuk seluruh produk yang masuk, beredar, dan diperdagangkan di wilayah Indonesia.",
     tahun: 2014,
-    sumber: "Pemerintah RI / DPR-RI",
-    kategori: "Undang-Undang",
+    sumber: "DPR RI & Presiden RI",
+    kategori: "Undang-undang RI",
     statusBerlaku: true,
     linkDokumen: "https://jdih.kemenag.go.id/Files/Regulasi/UU_33_2014.pdf"
   },
   {
     id: "reg_02",
     nomorAturan: "Peraturan Pemerintah No. 39 Tahun 2021",
-    tentang: "Penyelenggaraan Bidang Jaminan Produk Halal, merinci peran LPH, tata cara registrasi, dan tarif pendaftaran sanksi.",
+    tentang: "Penyelenggaraan Bidang Jaminan Produk Halal yang mengatur pemisahan administrasi, tahapan kewajiban bersertifikat, pengawasan LPH, dan tata cara sanksi administratif.",
     tahun: 2021,
     sumber: "Presiden RI",
-    kategori: "Peraturan Menteri",
+    kategori: "Peraturan Pemerintah",
     statusBerlaku: true,
     linkDokumen: "https://jdih.setkab.go.id/PUUdoc-176395-PP_Nomor_39_Tahun_2021.pdf"
   },
   {
     id: "reg_03",
-    nomorAturan: "SK Kepala BPJPH No. 150 Tahun 2022",
-    tentang: "Pedoman Modul Penilaian Akreditasi Lembaga Pemeriksa Halal (LPH) Pratama, Madya, dan Utama.",
-    tahun: 2022,
-    sumber: "Badan Penyelenggara Jaminan Produk Halal",
-    kategori: "Keputusan BPJPH",
+    nomorAturan: "Keputusan Menteri Agama No. 748 Tahun 2021",
+    tentang: "Jenis Produk yang Wajib Bersertifikat Halal, merinci klasifikasi jenis barang gunaan, makanan, minuman, obat-obatan, kosmetik, serta jasa penyembelihan.",
+    tahun: 2021,
+    sumber: "Menteri Agama RI",
+    kategori: "Keputusan Menteri Agama",
     statusBerlaku: true,
-    linkDokumen: "https://halal.go.id/dokumen/Keputusan_Kepala_BPJPH_150_2022.pdf"
+    linkDokumen: "https://jdih.kemenag.go.id/Files/Regulasi/KMA_748_2021.pdf"
   },
   {
     id: "reg_04",
-    nomorAturan: "SOP-LPHAG-002 Rev.1",
-    tentang: "Prosedur Hubungan Industrial dan Penanganan Konflik Kepentingan Auditor LPH Al-Ghazali.",
+    nomorAturan: "SK Kepala BPJPH No. 78 Tahun 2023",
+    tentang: "Pedoman Sertifikasi Halal dengan Mekanisme Pernyataan Pelaku Usaha (Self Declare) bagi kriteria bahan tidak berisiko tinggi.",
     tahun: 2023,
-    sumber: "SOP Internal LPH Al-Ghazali",
-    kategori: "SOP Internal",
+    sumber: "Badan Penyelenggara Jaminan Produk Halal",
+    kategori: "Keputusan Kepala BPJPH",
+    statusBerlaku: true,
+    linkDokumen: "https://halal.go.id/dokumen/Keputusan_Kepala_BPJPH_78_2023.pdf"
+  },
+  {
+    id: "reg_05",
+    nomorAturan: "Peraturan BPOM No. 26 Tahun 2021",
+    tentang: "Persyaratan Informasi Nilai Gizi, Pencantuman Logo Halal untuk pangan olahan dengan sediaan bumbu pemicu kritis, serta klaim kebaikan produk.",
+    tahun: 2021,
+    sumber: "Badan Pengawas Obat dan Makanan (BPOM)",
+    kategori: "Peraturan BPOM",
+    statusBerlaku: true,
+    linkDokumen: "https://jdih.pom.go.id/Files/Regulasi/Peraturan_BPOM_26_2021.pdf"
+  },
+  {
+    id: "reg_06",
+    nomorAturan: "SNI 99001:2016",
+    tentang: "Standar Nasional Indonesia untuk Sistem manajemen halal - Persyaratan umum bagi industri pangan, logistik, pengemasan, dan layanan jasa katering halal.",
+    tahun: 2016,
+    sumber: "Badan Standardisasi Nasional (BSN)",
+    kategori: "Standar Nasional (SNI)",
     statusBerlaku: true,
     linkDokumen: "#"
+  },
+  {
+    id: "reg_07",
+    nomorAturan: "Fatwa MUI No. 34 Tahun 2020",
+    tentang: "Standar Sertifikasi Halal Produk Turunan Hewani Terbawa Enzimatis, penentuan status kehalalan mikroba rekombinan penghasil amilase pembantu.",
+    tahun: 2020,
+    sumber: "Komisi Fatwa Majelis Ulama Indonesia",
+    kategori: "Fatwa MUI",
+    statusBerlaku: true,
+    linkDokumen: "https://halalmui.org/fatwa/Fatwa_MUI_No_34_2020.pdf"
   }
 ];
 

@@ -92,10 +92,10 @@ export default function RolePermissionAlert({ role, activeTab }: RolePermissionP
       case "regulasi":
         const hasRegulasiEdit = role === "Admin Manager" || role === "Auditor";
         return {
-          title: "Dokumen Undang-Undang & Regulasi",
+          title: "Sistem Regulasi JPH & 7 Sub-Menu",
           desc: hasRegulasiEdit
-            ? "Anda memegang kewenangan hukum untuk merilis Keputusan BPJPH, PMA, atau SOP Internal terbaru."
-            : `Mode Tinjau. Dokumen regulasi JPH (Jaminan Produk Halal) hanya dapat diperbarui oleh Dewan Auditor atau Admin.`,
+            ? "Anda memiliki hak akses penuh untuk melakukan semua tindakan CRUD di sub-menu Undang-undang RI, Peraturan Pemerintah, Keputusan Menteri Agama, Keputusan Kepala BPJPH, Peraturan BPOM, Standar Nasional (SNI), dan Fatwa MUI."
+            : `Mode Tinjau. Perubahan draft hukum JPH (seperti UU RI, PP, KMA, Keputusan BPJPH, Peraturan BPOM, SNI, dan Fatwa MUI) hanya diizinkan untuk Admin Manager atau Auditor (saat ini Anda sebagai ${role}).`,
           status: hasRegulasiEdit ? "Akses Edit Aktif" : "Read-Only (Tergembok)",
           colorClass: hasRegulasiEdit
             ? "bg-emerald-50/50 border-emerald-500/20 text-emerald-950"
